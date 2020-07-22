@@ -1,0 +1,97 @@
+﻿@model PensionMenagmentService.Models.PensionViewModel
+
+
+@{
+    ViewData["Title"] = "CheckinAdd";
+}
+
+<h1>Check In</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3> Reservations for Today</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+
+
+                        <th>
+                            ReservationID
+                        </th>
+
+
+                        <th>
+                            Guest Name
+                        </th>
+                        <th>
+                            Room ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ReservedForToday)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReservationID)
+                            </td>
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Guest.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Room.RoomID)
+                            </td>
+                            <td>
+                                <a asp-action="SelectReservation" asp-route-id="@item.ReservationID">Select</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <h3> Rooms available Today</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Room ID
+                        </th>
+
+                        <th>
+                            for smokers
+                        </th>
+                        <th>
+                            room type
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.RoomList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RoomID)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Smoke)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nubmerbeds)
+                            </td>
+                            <td>
+                                <a asp-action="SelectRoom" asp-route-id="@item.RoomID">Select</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h5>@ViewBag.CheckinInformation</h5>
+    <h6>@ViewBag.CheckinData</h6>
+</div>
+

@@ -1,0 +1,60 @@
+﻿@model PensionMenagmentService.Models.PensionViewModel
+
+
+@{
+    ViewData["Title"] = "index";
+}
+
+<h1> Check-out </h1>
+
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                Room Number
+            </th>
+           
+            <th>
+                Occupied
+            </th>
+            <th>
+                for smokers
+            </th>
+            <th>
+                room type
+            </th>
+            <th>
+                Guest Name
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.RoomList)
+        {
+            <tr>
+              
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Is_ocuppied)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Smoke)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nubmerbeds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.Name)
+                </td>
+                <td>
+                    <a asp-action="CheckOutGuest" asp-route-id="@item.RoomID">Check-Out</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

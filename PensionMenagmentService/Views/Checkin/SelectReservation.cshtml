@@ -1,0 +1,56 @@
+﻿@model PensionMenagmentService.Models.PensionViewModel
+
+
+@{
+    ViewData["Title"] = "Selected Reservation";
+}
+
+<h1>Check In</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3> Reservations for Today</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+
+
+                        <th>
+                            ReservationID
+                        </th>
+
+
+                        <th>
+                            Guest Name
+                        </th>
+                        <th>
+                            Room ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ReservationList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReservationID)
+                            </td>
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Guest.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Room.RoomID)
+                            </td>
+                            <td>
+                                <a asp-action="CheckinAdd" asp-route-id="@item.ReservationID">Check-In</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

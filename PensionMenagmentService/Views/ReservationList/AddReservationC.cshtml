@@ -1,0 +1,104 @@
+﻿@model PensionMenagmentService.Models.PensionViewModel
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Reservation List</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+
+
+                        <th>
+                            ReservationID
+                        </th>
+                        <th>
+                            check in
+                        </th>
+                        <th>
+                            check out
+                        </th>
+                        <th>
+                            status
+                        </th>
+
+                        <th>
+                            Guest Name
+                        </th>
+                        <th>
+                            Room ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ReservationList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReservationID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Check_in)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modleItem => item.Check_out)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Guest.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Room.RoomID)
+                            </td>
+                            <td>
+                                <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Reservation Panel</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Add New Reservation</h6>
+                    <form asp-controller="ReservationList" asp-action="AddReservationC" autocomplete="off">
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Room Type</label>
+                            <select class="form-control" name="type" id="exampleFormControlSelect1">
+                                <option value="0">single person</option>
+                                <option value="1">double person</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">GuestID</label>
+                            <input type="text" class="form-control" name="idguest">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Arrival Date</label>
+                            <input type="text" class="form-control" name="checkin">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Departure Date</label>
+                            <input type="text" class="form-control" name="checkout">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="text-danger">@ViewBag.NoFreeRooms @ViewBag.ValidationText</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

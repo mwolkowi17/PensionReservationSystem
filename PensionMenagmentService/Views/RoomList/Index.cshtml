@@ -1,0 +1,62 @@
+﻿@model PensionMenagmentService.Models.PensionViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1> Room List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+          
+            <th>
+                Room Number
+            </th>
+            
+            <th>
+                Occupied
+            </th>
+            <th>
+                for smokers
+            </th>
+            <th>
+                is cleaned
+            </th>
+            <th>
+                room type
+            </th>
+            <th>
+                Guest Surname
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.RoomList)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.Is_ocuppied)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Smoke)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Is_cleaned)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nubmerbeds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.Surname)
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
