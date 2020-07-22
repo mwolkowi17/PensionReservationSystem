@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PensionMenagmentService.Data;
 using PensionMenagmentService.Models;
 
@@ -19,11 +20,13 @@ namespace PensionMenagmentService.Controllers
 
         public IActionResult Index()
         {
-            var roomsToDisplay = from n in _context.Rooms
-                                 select n;
+            var roomsToDisplay = _context.Rooms
+                                 .Include(a => a.Guest)
+                                 .ToList();
+                               
             var roomVM = new PensionViewModel()
             {
-                RoomList = roomsToDisplay.ToList()
+                RoomList = roomsToDisplay
             };
 
             return View(roomVM);
