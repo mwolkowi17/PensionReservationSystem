@@ -27,35 +27,44 @@
                 room type
             </th>
             <th>
-                Guest Surname
+                Price
+            </th>
+            <th>
+                Guest 
             </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.RoomList)
         {
-            <tr>
-               
-                <td>
-                    @Html.DisplayFor(modelItem => item.Number)
-                </td>
-               
-                <td>
-                    @Html.DisplayFor(modelItem => item.Is_ocuppied)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Smoke)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Is_cleaned)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nubmerbeds)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Guest.Surname)
-                </td>
-            </tr>
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Is_ocuppied)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Smoke)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Is_cleaned)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nubmerbeds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReguralPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guest.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guest.Surname)
+            </td>
+        </tr>
         }
     </tbody>
 

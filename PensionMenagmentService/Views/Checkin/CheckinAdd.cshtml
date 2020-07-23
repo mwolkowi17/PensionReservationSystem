@@ -24,7 +24,7 @@
                             Guest Name
                         </th>
                         <th>
-                            Room ID
+                            Room Nr
                         </th>
                     </tr>
                 </thead>
@@ -41,7 +41,7 @@
                                 @Html.DisplayFor(modelItem => item.Guest.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Room.RoomID)
+                                @Html.DisplayFor(modelItem => item.Room.Number)
                             </td>
                             <td>
                                 <a asp-action="SelectReservation" asp-route-id="@item.ReservationID">Select</a>
@@ -57,7 +57,7 @@
                 <thead>
                     <tr>
                         <th>
-                            Room ID
+                            Room Nr
                         </th>
 
                         <th>
@@ -73,7 +73,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.RoomID)
+                                @Html.DisplayFor(modelItem => item.Number)
                             </td>
 
                             <td>

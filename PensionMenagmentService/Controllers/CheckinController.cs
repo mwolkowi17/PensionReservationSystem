@@ -89,7 +89,7 @@ namespace PensionMenagmentService.Controllers
             _context.SaveChanges();
             //return RedirectToAction(nameof(Index));
             ViewBag.CheckinInformation = "Check-in complete.";
-            ViewBag.CheckinData = $"Room nr {roomtocheckin.RoomID} has been rented to {usertocheckin.First().Name}.";
+            ViewBag.CheckinData = $"Room nr {roomtocheckin.Number} has been rented to {usertocheckin.First().Name}.";
 
             var roomreservedfortoday = _context.Reserevations
                                        .Where(n => n.Check_in.Date == DateTime.Today.Date)
@@ -140,7 +140,7 @@ namespace PensionMenagmentService.Controllers
 
 
             ViewBag.CheckinInformation = "Check-in Complete.";
-            ViewBag.CheckinData = $"Room nr {id} has been rented to {name} {surname}";
+            ViewBag.CheckinData = $"Room nr {roomtocheckin.First().Number} has been rented to {name} {surname}";
             var roomreservedfortoday = _context.Reserevations
                                        .Where(n => n.Check_in.Date == DateTime.Today.Date)
                                        .Include(c => c.Guest)

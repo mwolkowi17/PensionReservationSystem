@@ -18,6 +18,7 @@ namespace PensionMenagmentService.Models
         public bool Smoke { get; set; }
         public bool Is_cleaned { get; set; }
         public RoomType nubmerbeds { get; set; }
+        public int ReguralPrice { get; set; }
         public Guest Guest { get; set; }
     }
 }
