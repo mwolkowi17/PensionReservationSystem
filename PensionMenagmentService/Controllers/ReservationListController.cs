@@ -136,8 +136,8 @@ namespace PensionMenagmentService.Controllers
                                                 where item.ReservationID == id
                                                 select item).FirstOrDefault();
             ReservationHistory NewReservationHistoryItem = new ReservationHistory();
-            NewReservationHistoryItem.check_in_History = ReservationToArchive.Check_in;
-            NewReservationHistoryItem.check_out_History = ReservationToArchive.Check_out;
+            NewReservationHistoryItem.check_in_History = ReservationToArchive.Check_in.Date;
+            NewReservationHistoryItem.check_out_History = ReservationToArchive.Check_out.Date;
             NewReservationHistoryItem.Guest = ReservationToArchive.Guest;
             NewReservationHistoryItem.GuestName_History = ReservationToArchive.Guest.Name;
             NewReservationHistoryItem.Room = ReservationToArchive.Room;

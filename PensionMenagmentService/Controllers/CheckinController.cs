@@ -51,7 +51,8 @@ namespace PensionMenagmentService.Controllers
             {
                 RoomList = roomselected
             };
-            ViewBag.RoomNr = id;
+            ViewBag.RoomId = roomselected.First().RoomID;
+            ViewBag.RoomNr = roomselected.First().Number;
             return View(checkindata);
         }
 
@@ -111,7 +112,7 @@ namespace PensionMenagmentService.Controllers
             return View(checkindata);
         }
 
-        public IActionResult CheckinRoomAdd(int id, string name, string surname)
+        public IActionResult CheckinRoomAdd(int id, string name, string surname, DateTime departureDate)
         {
             var roomtocheckin = _context.Rooms
                                 .Where(n => n.RoomID == id)
@@ -163,11 +164,20 @@ namespace PensionMenagmentService.Controllers
             };
             //do zrobienia bo nie działa dobrze
             //if (!checkindata.GuestList.Contains(newguest))
-            if (guestcontain.ToList().Count == 0)
+            if (guestcontain.Count == 0)
             {
                 _context.Guests.Add(newguest);
                 _context.SaveChanges();
             }
+
+            Reservation NewReservation = new Reservation();
+            NewReservation.Status = 0;
+            NewReservation.Guest = newguest;
+            NewReservation.Room = roomtocheckin.First();
+            NewReservation.Check_in = DateTime.Now.Date;
+            NewReservation.Check_out = departureDate;
+            _context.Reserevations.Add(NewReservation);
+            _context.SaveChanges();
             return View(checkindata);
         }
     }

@@ -55,18 +55,22 @@
                     <form asp-controller="Checkin" asp-action="CheckinRoomAdd" autocomplete="off">
                         <label for="exampleFormControlSelect1">Room Nr</label>
                         <select class="form-control" name="id" id="exampleFormControlSelect1">
-                            <option value=@ViewBag.RoomNr>@ViewBag.RoomNr</option>
+                            <option value=@ViewBag.RoomId>@ViewBag.RoomNr</option>
 
 
                         </select>
 
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Name</label>
+                            <label for="nameInput">Name</label>
                             <input type="text" class="form-control" name="name">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Surname</label>
+                            <label for="nameInput">Surname</label>
                             <input type="text" class="form-control" name="surname">
+                        </div>
+                        <div class="form-group">
+                            <label for="nameInput">DepartureDate</label>
+                            <input type="text" class="form-control" name="departureDate">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>

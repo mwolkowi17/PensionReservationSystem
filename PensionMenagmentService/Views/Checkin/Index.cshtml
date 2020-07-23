@@ -43,9 +43,18 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Room.Number)
                             </td>
+                            @if (item.Room.Is_ocuppied == false) { 
                             <td>
                                 <a asp-action="SelectReservation" asp-route-id="@item.ReservationID">Select</a>
                             </td>
+                            }
+                            @if(item.Room.Is_ocuppied==true)
+                            {
+                                <td>
+                                    CheckedIn
+                                </td>
+
+                            }
                         </tr>
                     }
                 </tbody>

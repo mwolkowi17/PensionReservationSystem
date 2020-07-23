@@ -27,6 +27,9 @@
                 Guest Name
             </th>
             <th>
+                Guest Surname
+            </th>
+            <th>
                 Room Nr
             </th>
         </tr>
@@ -34,28 +37,31 @@
     <tbody>
         @foreach (var item in Model.ReservationHistoryList)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReservationHistoryID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.check_in_History)
-                </td>
-                <td>
-                    @Html.DisplayFor(modleItem => item.check_out_History)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservationHistoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.check_in_History.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modleItem => item.check_out_History.Date)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Guest.GuestID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GuestName_History)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Room.Number)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guest.GuestID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guest.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guest.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.Number)
+            </td>
 
-            </tr>
+        </tr>
         }
     </tbody>
 </table>
