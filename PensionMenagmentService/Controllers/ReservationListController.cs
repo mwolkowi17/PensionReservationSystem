@@ -80,7 +80,7 @@ namespace PensionMenagmentService.Controllers
 
                 if (RoomToRent != null)
                 {
-                    RoomToRent.Is_ocuppied = true;
+                    //RoomToRent.Is_ocuppied = true;
 
                     Reservation NewReservation = new Reservation();
                     NewReservation.Status = 0;

@@ -38,30 +38,35 @@
                 <tbody>
                     @foreach (var item in Model.ReservationList)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ReservationID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Check_in)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modleItem => item.Check_out)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReservationID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Check_in)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modleItem => item.Check_out)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Guest.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Room.RoomID)
-                            </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Room.RoomID)
+                        </td>
+                       
                             <td>
                                 <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
                             </td>
-                        </tr>
+                        
+                       
+                           
+                        
+                    </tr>
                     }
                 </tbody>
             </table>
