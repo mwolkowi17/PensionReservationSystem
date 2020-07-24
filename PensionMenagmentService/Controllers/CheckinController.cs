@@ -126,8 +126,7 @@ namespace PensionMenagmentService.Controllers
             newguest.Surname = surname;
             newguest.Member_since = DateTime.Today;
 
-            roomtocheckin.First().Guest = newguest;
-            _context.SaveChanges();
+           
 
 
 
@@ -162,17 +161,24 @@ namespace PensionMenagmentService.Controllers
                 GuestList = simpleguest.ToList()
 
             };
-            //do zrobienia bo nie działa dobrze
-            //if (!checkindata.GuestList.Contains(newguest))
-            if (guestcontain.Count == 0)
+            
+            if(guestcontain.Count()==0)
             {
                 _context.Guests.Add(newguest);
                 _context.SaveChanges();
             }
 
+            var guestToCheckin = _context.Guests
+                                 .Where(n => n.Name == newguest.Name)
+                                 .Where(n => n.Surname == newguest.Surname)
+                                 .First();
+
+            roomtocheckin.First().Guest = guestToCheckin;
+            _context.SaveChanges();
+
             Reservation NewReservation = new Reservation();
             NewReservation.Status = 0;
-            NewReservation.Guest = newguest;
+            NewReservation.Guest = guestToCheckin;
             NewReservation.Room = roomtocheckin.First();
             NewReservation.Check_in = DateTime.Now.Date;
             NewReservation.Check_out = departureDate;
