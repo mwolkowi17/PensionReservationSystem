@@ -11,5 +11,9 @@ namespace PensionMenagmentService.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime Member_since { get; set; }
+        public string City { get; set; }
+        public string Adress { get; set; }
+        public string EmailAdress { get; set; }
+        public string TelephoneNumber { get; set; }
     }
 }
