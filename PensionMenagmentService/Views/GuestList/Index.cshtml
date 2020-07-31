@@ -12,7 +12,7 @@
                 <thead>
                     <tr>
                         <th>
-                            GuestID
+                            ID
                         </th>
                         <th>
                             Name
@@ -28,23 +28,26 @@
                 <tbody>
                     @foreach (var item in Model.GuestList)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.GuestID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Surname)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Member_since)
-                            </td>
-                            <td>
-                                <a asp-action="DeleteGuest" asp-route-id="@item.GuestID">Delete</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GuestID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Member_since)
+                        </td>
+                        <td>
+                            <a asp-action="GetDetails" asp-route-id="@item.GuestID">Details</a>
+                        </td>
+                        <td>
+                            <a asp-action="DeleteGuest" asp-route-id="@item.GuestID">Delete</a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -63,6 +66,22 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Surname</label>
                             <input type="text" class="form-control" name="surnameuser">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">City</label>
+                            <input type="text" class="form-control" name="cityuser">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Adress</label>
+                            <input type="text" class="form-control" name="adressuser">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Email</label>
+                            <input type="text" class="form-control" name="emailuser">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Telephone Nr</label>
+                            <input type="text" class="form-control" name="telephonenumberuser">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>

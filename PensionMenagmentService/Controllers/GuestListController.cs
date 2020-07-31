@@ -30,7 +30,7 @@ namespace PensionMenagmentService.Controllers
             return View(guestVM);
         }
 
-        public IActionResult AddGuest(string nameuser, string surnameuser)
+        public IActionResult AddGuest(string nameuser, string surnameuser, string cityuser, string adressuser, string emailuser, string telephonenumberuser)
         {
             if (nameuser != null && surnameuser != null)
             {
@@ -38,7 +38,11 @@ namespace PensionMenagmentService.Controllers
                 {
                     Name=nameuser,
                     Surname=surnameuser,
-                    Member_since=DateTime.Now
+                    Member_since=DateTime.Now,
+                    City=cityuser,
+                    Adress=adressuser,
+                    EmailAdress=emailuser,
+                    TelephoneNumber=telephonenumberuser
                 };
 
                 _context.Guests.Add(nextguest);
@@ -65,6 +69,14 @@ namespace PensionMenagmentService.Controllers
             _context.Guests.Remove(usertodelete);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult GetDetails (int id)
+        {
+            var guestDetails = _context.Guests
+                             .Where(c => c.GuestID == id)
+                             .FirstOrDefault();
+            return View(guestDetails);
         }
     }
 }
