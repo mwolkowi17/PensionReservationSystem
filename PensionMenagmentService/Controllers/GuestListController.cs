@@ -32,7 +32,7 @@ namespace PensionMenagmentService.Controllers
 
         public IActionResult AddGuest(string nameuser, string surnameuser, string cityuser, string adressuser, string emailuser, string telephonenumberuser)
         {
-            if (nameuser != null && surnameuser != null)
+            if (nameuser != null && surnameuser != null && ModelState.IsValid)
             {
                 Guest nextguest = new Guest()
                 {
@@ -49,7 +49,20 @@ namespace PensionMenagmentService.Controllers
                 _context.SaveChanges();
 
             }
-            return RedirectToAction(nameof(Index));
+            if (nameuser == null || surnameuser == null)
+            {
+                ViewBag.ValidationText = "Please enter correct name and surname!";
+            }
+            //return RedirectToAction(nameof(Index));
+            var guestToDislplay = from n in _context.Guests
+                                  select n;
+            var guestVM = new PensionViewModel()
+            {
+                GuestList = guestToDislplay.ToList()
+
+            };
+            return View(guestVM);
+                 
         }
 
         public IActionResult DeleteGuest(int id)
