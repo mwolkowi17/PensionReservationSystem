@@ -39,7 +39,7 @@
                             @Html.DisplayFor(modelItem => item.Surname)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Member_since)
+                            @Html.DisplayFor(modelItem => item.Member_since.Year)
                         </td>
                         <td>
                             <a asp-action="GetDetails" asp-route-id="@item.GuestID">Details</a>
