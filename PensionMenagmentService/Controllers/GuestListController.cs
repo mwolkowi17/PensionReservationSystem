@@ -29,7 +29,7 @@ namespace PensionMenagmentService.Controllers
             };
             return View(guestVM);
         }
-
+        [HttpPost]
         public IActionResult AddGuest(string nameuser, string surnameuser, string cityuser, string adressuser, string emailuser, string telephonenumberuser)
         {
             if (nameuser != null && surnameuser != null)
@@ -90,6 +90,30 @@ namespace PensionMenagmentService.Controllers
                              .Where(c => c.GuestID == id)
                              .FirstOrDefault();
             return View(guestDetails);
+        }
+
+        public IActionResult Edit (int id) 
+        {
+            var guestDetails = _context.Guests
+                            .Where(c => c.GuestID == id)
+                            .FirstOrDefault();
+            return View(guestDetails);
+        }
+        [HttpPost]
+        public IActionResult EditAdd(int id, string Name, string Surname, string City, string Adress, string EmailAdress, string TelephoneNumber)
+        {
+            var guestToEdit = _context.Guests
+                           .Where(c => c.GuestID == id)
+                           .FirstOrDefault();
+            guestToEdit.Name = Name;
+            guestToEdit.Surname = Surname;
+            guestToEdit.City = City;
+            guestToEdit.Adress = Adress;
+            guestToEdit.EmailAdress = EmailAdress;
+            guestToEdit.TelephoneNumber = TelephoneNumber;
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
