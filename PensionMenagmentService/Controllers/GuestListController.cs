@@ -32,7 +32,7 @@ namespace PensionMenagmentService.Controllers
 
         public IActionResult AddGuest(string nameuser, string surnameuser, string cityuser, string adressuser, string emailuser, string telephonenumberuser)
         {
-            if (nameuser != null && surnameuser != null && ModelState.IsValid)
+            if (nameuser != null && surnameuser != null)
             {
                 Guest nextguest = new Guest()
                 {
