@@ -15,7 +15,7 @@
 
 
                         <th>
-                            ReservationID
+                            ID
                         </th>
                         <th>
                             check in
@@ -28,10 +28,13 @@
                         </th>
 
                         <th>
-                            Guest Name
+                            Name
                         </th>
                         <th>
-                            Room ID
+                            Suraname
+                        </th>
+                        <th>
+                            Room Nr
                         </th>
                     </tr>
                 </thead>
@@ -56,16 +59,19 @@
                             @Html.DisplayFor(modelItem => item.Guest.Name)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Surname)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.Room.RoomID)
                         </td>
-                       
-                            <td>
-                                <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
-                            </td>
-                        
-                       
-                           
-                        
+
+                        <td>
+                            <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
+                        </td>
+
+
+
+
                     </tr>
                     }
                 </tbody>
