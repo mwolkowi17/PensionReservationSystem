@@ -16,12 +16,15 @@
 
 
                         <th>
-                            ReservationID
+                        Reservation ID
                         </th>
 
 
                         <th>
-                            Guest Name
+                            Name
+                        </th>
+                        <th>
+                            Surname
                         </th>
                         <th>
                             Room Nr
@@ -31,31 +34,35 @@
                 <tbody>
                     @foreach (var item in Model.ReservationList)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ReservationID)
-                            </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReservationID)
+                        </td>
 
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Guest.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Room.Number)
-                            </td>
-                            @if (item.Room.Is_ocuppied == false) { 
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Room.Number)
+                        </td>
+                        @if (item.Room.Is_ocuppied == false)
+                        {
                             <td>
                                 <a asp-action="SelectReservation" asp-route-id="@item.ReservationID">Select</a>
                             </td>
-                            }
-                            @if(item.Room.Is_ocuppied==true)
-                            {
-                                <td>
-                                    CheckedIn
-                                </td>
+                        }
+                        @if (item.Room.Is_ocuppied == true)
+                        {
+                            <td>
+                                CheckedIn
+                            </td>
 
-                            }
-                        </tr>
+                        }
+                    </tr>
                     }
                 </tbody>
             </table>

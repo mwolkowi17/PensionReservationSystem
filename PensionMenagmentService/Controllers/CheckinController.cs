@@ -90,7 +90,7 @@ namespace PensionMenagmentService.Controllers
             _context.SaveChanges();
             //return RedirectToAction(nameof(Index));
             ViewBag.CheckinInformation = "Check-in complete.";
-            ViewBag.CheckinData = $"Room nr {roomtocheckin.Number} has been rented to {usertocheckin.First().Name}.";
+            ViewBag.CheckinData = $"Room nr {roomtocheckin.Number} has been rented to {usertocheckin.First().Name} {usertocheckin.First().Surname}.";
 
             var roomreservedfortoday = _context.Reserevations
                                        .Where(n => n.Check_in.Date == DateTime.Today.Date)

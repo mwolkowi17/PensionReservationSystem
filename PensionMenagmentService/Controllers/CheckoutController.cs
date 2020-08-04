@@ -35,6 +35,19 @@ namespace PensionMenagmentService.Controllers
 
         public IActionResult CheckOutGuest(int id)
         {
+            var room = _context.Rooms
+                      .Where(n => n.Is_ocuppied == true)
+                      .Include(c => c.Guest)
+                      .ToList();
+
+
+            var checkoutdata = new PensionViewModel()
+            {
+                RoomList = room
+
+            };
+            ViewBag.FirstNameGuest = room.FirstOrDefault().Guest.Name;
+            ViewBag.NameGuest = room.FirstOrDefault().Guest.Surname;
             var roomtocheckout = _context.Rooms
                                  .Where(n => n.RoomID == id)
                                  .Include(c => c.Guest)
@@ -44,18 +57,9 @@ namespace PensionMenagmentService.Controllers
             roomtocheckout.FirstOrDefault().Guest = null;
             _context.SaveChanges();
 
-            var room = _context.Rooms
-                       .Where(n => n.Is_ocuppied == true)
-                       .Include(c => c.Guest)
-                       .ToList();
-                      
-
-            var checkoutdata = new PensionViewModel()
-            {
-                RoomList = room
-
-            };
-            return RedirectToAction(nameof(Index));
+           
+            //return RedirectToAction(nameof(Index));
+            return View(checkoutdata);
         }
     }
 }

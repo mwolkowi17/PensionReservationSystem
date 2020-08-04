@@ -16,12 +16,15 @@
 
 
                         <th>
-                            ReservationID
+                            Reservation ID
                         </th>
 
 
                         <th>
-                            Guest Name
+                            Name
+                        </th>
+                        <th>
+                            Surname
                         </th>
                         <th>
                             Room Nr
@@ -31,22 +34,25 @@
                 <tbody>
                     @foreach (var item in Model.ReservationList)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ReservationID)
-                            </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReservationID)
+                        </td>
 
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Guest.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Room.Number)
-                            </td>
-                            <td>
-                                <a asp-action="CheckinAdd" asp-route-id="@item.ReservationID">Check-In</a>
-                            </td>
-                        </tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Room.Number)
+                        </td>
+                        <td>
+                            <a asp-action="CheckinAdd" asp-route-id="@item.ReservationID">Check-In</a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

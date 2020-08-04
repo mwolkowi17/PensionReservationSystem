@@ -21,7 +21,10 @@
 
 
                         <th>
-                            Guest Name
+                            Name
+                        </th>
+                        <th>
+                            Surname
                         </th>
                         <th>
                             Room Nr
@@ -31,20 +34,23 @@
                 <tbody>
                     @foreach (var item in Model.ReservedForToday)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ReservationID)
-                            </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReservationID)
+                        </td>
 
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Guest.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Room.Number)
-                            </td>
-                            
-                        </tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Room.Number)
+                        </td>
+
+                    </tr>
                     }
                 </tbody>
             </table>
