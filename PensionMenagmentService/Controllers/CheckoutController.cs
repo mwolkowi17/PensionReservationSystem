@@ -48,6 +48,9 @@ namespace PensionMenagmentService.Controllers
             };
             ViewBag.FirstNameGuest = room.FirstOrDefault().Guest.Name;
             ViewBag.NameGuest = room.FirstOrDefault().Guest.Surname;
+
+          
+           
             var roomtocheckout = _context.Rooms
                                  .Where(n => n.RoomID == id)
                                  .Include(c => c.Guest)
@@ -56,8 +59,16 @@ namespace PensionMenagmentService.Controllers
             roomtocheckout.FirstOrDefault().Is_ocuppied = false;
             roomtocheckout.FirstOrDefault().Guest = null;
             _context.SaveChanges();
+            //new segment - to tests 
+            var reservationToCheckout = _context.Reserevations
+                                        .Where(n => n.Room == roomtocheckout.FirstOrDefault())
+                                        .FirstOrDefault();
+            var numberOfDaysInHotel = reservationToCheckout.Check_out.DayOfYear - reservationToCheckout.Check_in.DayOfYear;
+            // end of ne segment
+            var chargeForStayInHotel = numberOfDaysInHotel * roomtocheckout.FirstOrDefault().ReguralPrice;
 
-           
+            ViewBag.DaysInHotelTotal = $"Days in hotel: {numberOfDaysInHotel}.";
+            ViewBag.TotalAmount = $"Total amount for stay: {chargeForStayInHotel} PLN.";
             //return RedirectToAction(nameof(Index));
             return View(checkoutdata);
         }
