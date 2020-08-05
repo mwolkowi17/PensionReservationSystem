@@ -23,9 +23,7 @@
                         <th>
                             check out
                         </th>
-                        <th>
-                            status
-                        </th>
+                        
 
                         <th>
                             Name
@@ -51,9 +49,7 @@
                         <td>
                             @Html.DisplayFor(modleItem => item.Check_out)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </td>
+                       
 
                         <td>
                             @Html.DisplayFor(modelItem => item.Guest.Name)
@@ -64,7 +60,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Room.Number)
                         </td>
-
+                        <td>
+                            <a asp-action="ReservationDetails" asp-route-id="@item.ReservationID" >Details</a>
+                        </td>
                         <td>
                             <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
                         </td>

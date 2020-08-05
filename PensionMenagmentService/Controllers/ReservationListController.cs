@@ -142,6 +142,7 @@ namespace PensionMenagmentService.Controllers
             NewReservationHistoryItem.Guest = ReservationToArchive.Guest;
             NewReservationHistoryItem.GuestName_History = ReservationToArchive.Guest.Name;
             NewReservationHistoryItem.Room = ReservationToArchive.Room;
+            NewReservationHistoryItem.TotalAmount_History = ReservationToArchive.TotalAmount;
 
             _context.ReservationHistoryItems.Add(NewReservationHistoryItem);
             _context.Reserevations.Remove(reservationtodelete);
@@ -149,6 +150,16 @@ namespace PensionMenagmentService.Controllers
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult ReservationDetails(int id)
+        {
+            var reservationDetails = _context.Reserevations
+                                   .Where(n => n.ReservationID == id)
+                                   .Include(c=>c.Guest)
+                                   .Include(c=>c.Room)
+                                   .FirstOrDefault();
+          
+            return View(reservationDetails);
         }
     }
 }

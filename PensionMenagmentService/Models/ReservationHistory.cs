@@ -20,5 +20,6 @@ namespace PensionMenagmentService.Models
         public string GuestName_History { get; set; }
         //public int RoomID_History { get; set; }
         public Room Room { get; set; }
+        public int TotalAmount_History { get; set; }
     }
 }
