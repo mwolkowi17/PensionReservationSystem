@@ -182,6 +182,7 @@ namespace PensionMenagmentService.Controllers
             NewReservation.Room = roomtocheckin.First();
             NewReservation.Check_in = DateTime.Now.Date;
             NewReservation.Check_out = departureDate;
+            NewReservation.TotalAmount = (departureDate.DayOfYear - DateTime.Now.DayOfYear) * roomtocheckin.First().ReguralPrice;
             _context.Reserevations.Add(NewReservation);
             _context.SaveChanges();
             return View(checkindata);
