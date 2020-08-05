@@ -32,5 +32,7 @@ namespace PensionMenagmentService.Models
         //public int RoomID { get; set; }
         public Room Room { get; set; }
 
+        public int TotalAmount { get; set; }
+
     }
 }

@@ -89,6 +89,7 @@ namespace PensionMenagmentService.Controllers
                     NewReservation.Room = RoomToRent;
                     NewReservation.Check_in = checkin;
                     NewReservation.Check_out = checkout;
+                    NewReservation.TotalAmount = (checkout.DayOfYear - checkin.DayOfYear) * RoomToRent.ReguralPrice;
 
                     _context.Reserevations.Add(NewReservation);
                     _context.SaveChanges();

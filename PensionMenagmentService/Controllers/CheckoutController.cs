@@ -59,14 +59,14 @@ namespace PensionMenagmentService.Controllers
             roomtocheckout.FirstOrDefault().Is_ocuppied = false;
             roomtocheckout.FirstOrDefault().Guest = null;
             _context.SaveChanges();
-            //new segment - to tests 
+            //new segment - to tests - to reifne
             var reservationToCheckout = _context.Reserevations
                                         .Where(n => n.Room == roomtocheckout.FirstOrDefault())
                                         .FirstOrDefault();
-            var numberOfDaysInHotel = reservationToCheckout.Check_out.DayOfYear - reservationToCheckout.Check_in.DayOfYear;
-            // end of ne segment
+            var numberOfDaysInHotel = DateTime.Now.DayOfYear - reservationToCheckout.Check_in.DayOfYear;
+          
             var chargeForStayInHotel = numberOfDaysInHotel * roomtocheckout.FirstOrDefault().ReguralPrice;
-
+            // end of ne segment
             ViewBag.DaysInHotelTotal = $"Days in hotel: {numberOfDaysInHotel}.";
             ViewBag.TotalAmount = $"Total amount for stay: {chargeForStayInHotel} PLN.";
             //return RedirectToAction(nameof(Index));
