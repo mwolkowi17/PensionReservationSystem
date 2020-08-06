@@ -2,7 +2,7 @@
 
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "AddResrvationC";
 }
 
 <h1>Reservation List</h1>
@@ -61,7 +61,7 @@
                             @Html.DisplayFor(modelItem => item.Room.RoomID)
                         </td>
                         <td>
-                            <a asp-action="ResevationDetails" asp-route-id="@item.ReservationID">Details</a>
+                            <a asp-action="ReservationDetails" asp-route-id="@item.ReservationID">Details</a>
                         </td>
                         <td>
                             <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
