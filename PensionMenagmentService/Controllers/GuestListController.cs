@@ -130,5 +130,19 @@ namespace PensionMenagmentService.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult GetUserReservationHistory (int id)
+        {
+            var reservationHistoryOfGuest = _context.ReservationHistoryItems
+                                            .Include(c => c.Guest)
+                                            .Include(c => c.Room)
+                                            .Where(n => n.Guest.GuestID == id)
+                                            .ToList();
+            var ReservationtoDisplay = new PensionViewModel()
+            {
+                ReservationHistoryList = reservationHistoryOfGuest
+            };
+            return View(ReservationtoDisplay);
+        }
     }
 }

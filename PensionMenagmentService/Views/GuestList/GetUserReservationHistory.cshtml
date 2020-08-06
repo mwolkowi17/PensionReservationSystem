@@ -1,0 +1,69 @@
+﻿@model PensionMenagmentService.Models.PensionViewModel
+
+@{
+    ViewData["Title"] = "GetUserReservationHistory";
+}
+
+<h1>Reservation History List</h1>
+<table class="table">
+    <thead>
+        <tr>
+
+
+            <th>
+                ReservationHistID
+            </th>
+            <th>
+                check in
+            </th>
+            <th>
+                check out
+            </th>
+
+            <th>
+                Guest ID
+            </th>
+            <th>
+                Guest Name
+            </th>
+            <th>
+                Guest Surname
+            </th>
+            <th>
+                Room Nr
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ReservationHistoryList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservationHistoryID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.check_in_History)
+                </td>
+                <td>
+                    @Html.DisplayFor(modleItem => item.check_out_History)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.GuestID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.Number)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index">Back to Guest List</a>
