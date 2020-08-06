@@ -7,57 +7,7 @@
 
     <h1>Check Out</h1>
      
-    <table class="table">
-        <thead>
-            <tr>
-
-                <th>
-                    Room Number
-                </th>
-
-                <th>
-                    Occupied
-                </th>
-                <th>
-                    for smokers
-                </th>
-                <th>
-                    room type
-                </th>
-                <th>
-                    Guest
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.RoomList)
-            {
-                <tr>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Number)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Is_ocuppied)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Smoke)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.nubmerbeds)
-                    </td>
-                    <td>
-                        @ViewBag.FirstNameGuest
-                    <td>
-                        @ViewBag.NameGuest
-                    </td>
-                    
-                </tr>
-            }
-        </tbody>
-
-    </table>
+   
 
     <h4> @ViewBag.FirstNameGuest @ViewBag.NameGuest has been checked-out.</h4>
     <p>  </p>
