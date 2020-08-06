@@ -34,5 +34,7 @@ namespace PensionMenagmentService.Models
 
         public int TotalAmount { get; set; }
 
+        public bool BreakfestIncluded { get; set; }
+
     }
 }

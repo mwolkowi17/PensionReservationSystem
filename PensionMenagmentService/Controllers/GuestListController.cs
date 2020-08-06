@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.EntityFrameworkCore;
 using PensionMenagmentService.Data;
 using PensionMenagmentService.Models;
 
@@ -79,9 +80,23 @@ namespace PensionMenagmentService.Controllers
             {
                 _context.ReservationHistoryItems.Remove(item);
             }
+
+            var reservationsIncludeUserToDelete = _context.Reserevations
+                                                 .Where(n => n.Guest == usertodelete)
+                                                 .Include(c => c.Guest)
+                                                 .ToList();
+            if (reservationsIncludeUserToDelete.Count == 0) 
+            { 
             _context.Guests.Remove(usertodelete);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewBag.CanNotDelInform = "You can't delete client, because she/he has active reservation";
+                return View();
+            }
+            
         }
 
         public IActionResult GetDetails (int id)
