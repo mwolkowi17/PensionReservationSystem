@@ -30,7 +30,7 @@ namespace PensionMenagmentService.Controllers
             };
             return View(reservationVM);
         }
-        public IActionResult AddReservationC(RoomType type, int idguest, DateTime checkin, DateTime checkout)
+        public IActionResult AddReservationC(RoomType type, int idguest, DateTime checkin, DateTime checkout, bool breakfestincluded)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace PensionMenagmentService.Controllers
                     NewReservation.Check_in = checkin;
                     NewReservation.Check_out = checkout;
                     NewReservation.TotalAmount = (checkout.DayOfYear - checkin.DayOfYear) * RoomToRent.ReguralPrice;
-
+                    NewReservation.BreakfestIncluded = breakfestincluded;
                     _context.Reserevations.Add(NewReservation);
                     _context.SaveChanges();
 

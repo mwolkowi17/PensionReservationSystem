@@ -112,7 +112,7 @@ namespace PensionMenagmentService.Controllers
             return View(checkindata);
         }
 
-        public IActionResult CheckinRoomAdd(int id, string name, string surname, DateTime departureDate)
+        public IActionResult CheckinRoomAdd(int id, string name, string surname, DateTime departureDate, bool breakfestincluded)
         {
             var roomtocheckin = _context.Rooms
                                 .Where(n => n.RoomID == id)
@@ -183,6 +183,7 @@ namespace PensionMenagmentService.Controllers
             NewReservation.Check_in = DateTime.Now.Date;
             NewReservation.Check_out = departureDate;
             NewReservation.TotalAmount = (departureDate.DayOfYear - DateTime.Now.DayOfYear) * roomtocheckin.First().ReguralPrice;
+            NewReservation.BreakfestIncluded = breakfestincluded;
             _context.Reserevations.Add(NewReservation);
             _context.SaveChanges();
             return View(checkindata);

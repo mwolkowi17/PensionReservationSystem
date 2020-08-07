@@ -23,7 +23,7 @@
                         <th>
                             check out
                         </th>
-                        
+
 
                         <th>
                             Name
@@ -34,6 +34,9 @@
                         <th>
                             Room Nr
                         </th>
+                        <!--<th>
+                         Breakfest
+                        </th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +52,7 @@
                         <td>
                             @Html.DisplayFor(modleItem => item.Check_out)
                         </td>
-                       
+
 
                         <td>
                             @Html.DisplayFor(modelItem => item.Guest.Name)
@@ -60,8 +63,11 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Room.Number)
                         </td>
+                        <!--<td>
+                         @Html.DisplayFor(modelItem => item.BreakfestIncluded)
+                        </td>-->
                         <td>
-                            <a asp-action="ReservationDetails" asp-route-id="@item.ReservationID" >Details</a>
+                            <a asp-action="ReservationDetails" asp-route-id="@item.ReservationID">Details</a>
                         </td>
                         <td>
                             <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
@@ -101,6 +107,14 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Departure Date</label>
                             <input type="text" class="form-control" name="checkout">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Breakfest</label>
+                            <select class="form-control" name="breakfestincluded" id="exampleFormControlSelect1">
+                                <option value="false">no breakfest</option>
+                                <option value="true">with breakfest</option>
+
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
