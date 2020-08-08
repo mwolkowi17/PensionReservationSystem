@@ -1,0 +1,80 @@
+﻿@model PensionMenagmentService.Models.PensionViewModel
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Breakfasts for today</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+
+
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            check in
+                        </th>
+                        <th>
+                            check out
+                        </th>
+
+
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Suraname
+                        </th>
+                        <th>
+                            Room Nr
+                        </th>
+                        <!--<th>
+                         Breakfest
+                        </th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ReservationList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReservationID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Check_in)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modleItem => item.Check_out)
+                            </td>
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Guest.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Guest.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Room.Number)
+                            </td>
+                            <!--<td>
+                             @Html.DisplayFor(modelItem => item.BreakfestIncluded)
+                            </td>-->
+                           
+
+
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
