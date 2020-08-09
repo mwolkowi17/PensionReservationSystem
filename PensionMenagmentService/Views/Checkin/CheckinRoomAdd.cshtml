@@ -7,30 +7,30 @@
 
 <h1>Check In</h1>
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <h3> Reservations for Today</h3>
-            <table class="table">
-                <thead>
-                    <tr>
+    <!--<div class="row">
+            <div class="col">
+                <h3> Reservations for Today</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
 
 
-                        <th>
-                            ReservationID
-                        </th>
+                            <th>
+                                ReservationID
+                            </th>
 
 
-                        <th>
-                            Guest Name
-                        </th>
-                        <th>
-                            Room ID
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.ReservedForToday)
-                    {
+                            <th>
+                                Guest Name
+                            </th>
+                            <th>
+                                Room ID
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ReservedForToday)
+                        {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ReservationID)
@@ -43,54 +43,65 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Room.RoomID)
                             </td>
-                            <td>
-                                <a asp-action="SelectReservation" asp-route-id="@item.ReservationID">Select</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="col">
-            <h3> Rooms available Today</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            Room Nr
-                        </th>
+                            @if (item.Room.Is_ocuppied == false)
+                            {
+                                <td>
+                                    <a asp-action="SelectReservation" asp-route-id="@item.ReservationID">Select</a>
+                                </td>
+                            }
+                            @if (item.Room.Is_ocuppied == true)
+                            {
+                                <td>
+                                    CheckedIn
+                                </td>
 
-                        <th>
-                            for smokers
-                        </th>
-                        <th>
-                            room type
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.RoomList)
-                    {
+                            }
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <h3> Rooms available Today</h3>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Number)
-                            </td>
+                            <th>
+                                Room Nr
+                            </th>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Smoke)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.nubmerbeds)
-                            </td>
-                            <td>
-                                <a asp-action="SelectRoom" asp-route-id="@item.RoomID">Select</a>
-                            </td>
+                            <th>
+                                for smokers
+                            </th>
+                            <th>
+                                room type
+                            </th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.RoomList)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Number)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Smoke)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nubmerbeds)
+                                </td>
+                                <td>
+                                    <a asp-action="SelectRoom" asp-route-id="@item.RoomID">Select</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+    </div>-->
     <h5>@ViewBag.CheckinInformation</h5>
     <h6>@ViewBag.CheckinData</h6>
+    <a asp-action="Index">Beck to check-in main page</a>
 </div>
