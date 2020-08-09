@@ -51,6 +51,7 @@
     </dt>
     <dd class="col-sm-10">
         @Html.DisplayFor(model => model.BreakfestIncluded)
+        <a asp-action="ChangeBreakfest" asp-route-id="@Model.ReservationID">Change</a>
     </dd>
 
     <dt class="col-sm-2">
@@ -62,6 +63,6 @@
 </dl>
 </div>
 <div>
-   
+    
     <a asp-action="Index">Back to List</a>
 </div>

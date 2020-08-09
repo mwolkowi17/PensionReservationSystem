@@ -161,5 +161,26 @@ namespace PensionMenagmentService.Controllers
           
             return View(reservationDetails);
         }
+         
+        public IActionResult ChangeBreakfest (int id)
+        {
+            var reservationToChange = _context.Reserevations
+                                      .Where(n=>n.ReservationID ==id)
+                                      .Include(c => c.Guest)
+                                      .Include(c => c.Room)
+                                      .FirstOrDefault();
+            if (reservationToChange.BreakfestIncluded == true)
+            {
+                reservationToChange.BreakfestIncluded = false;
+                _context.SaveChanges();
+            }
+            else 
+            {
+                reservationToChange.BreakfestIncluded = true;
+                _context.SaveChanges();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+       
     }
 }
