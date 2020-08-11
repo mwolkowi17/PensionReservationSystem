@@ -2,7 +2,7 @@
 
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "FindGuestId";
 }
 
 <h1>Reservation List</h1>
@@ -42,66 +42,83 @@
                 <tbody>
                     @foreach (var item in Model.ReservationList)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ReservationID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Check_in)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modleItem => item.Check_out)
-                        </td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReservationID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Check_in)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modleItem => item.Check_out)
+                            </td>
 
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Guest.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Guest.Surname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Room.Number)
-                        </td>
-                        <!--<td>
-                         @Html.DisplayFor(modelItem => item.BreakfestIncluded)
-                        </td>-->
-                        <td>
-                            <a asp-action="ReservationDetails" asp-route-id="@item.ReservationID">Details</a>
-                        </td>
-                        <td>
-                            <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
-                        </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Guest.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Guest.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Room.Number)
+                            </td>
+                            <!--<td>
+                             @Html.DisplayFor(modelItem => item.BreakfestIncluded)
+                            </td>-->
+                            <td>
+                                <a asp-action="ReservationDetails" asp-route-id="@item.ReservationID">Details</a>
+                            </td>
+                            <td>
+                                <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
+                            </td>
 
 
 
 
-                    </tr>
+                        </tr>
                     }
                 </tbody>
             </table>
         </div>
         <div class="col">
-            <!--Searching guest block-->
-            
-                <div class="card" style="margin-bottom:20px">
-                    <div class="card-body">
-                        <h5 class="card-title">Search GuestID</h5>
-                        
-                        <form asp-controller="ReservationList" asp-action="FindGuestId" autocomplete="off">
+            <!--Searching result block-->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Surname
+                        </th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.GuestList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GuestID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Surname)
+                            </td>
+                           
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
 
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Guest Surname</label>
-                                <input type="text" class="form-control" name="guestname">
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </form>
-                    </div>
-                </div>
-            
-            <!--End of searching block-->
+            <!--End of result block-->
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Reservation Panel</h5>

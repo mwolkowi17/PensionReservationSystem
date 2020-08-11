@@ -181,6 +181,26 @@ namespace PensionMenagmentService.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult FindGuestId(string guestname)
+        {
+            
+            var searchedGuests = _context.Guests
+                               .Where(n => n.Surname == guestname)
+                               .ToList();
+
+            var reservationsToDisplay = _context.Reserevations
+                                      .Include(c => c.Room)
+                                      .Include(c => c.Guest)
+                                      .ToList();
+
+            var GuestIdDisplay = new PensionViewModel()
+            {
+                GuestList = searchedGuests,
+                ReservationList=reservationsToDisplay
+            };        
+            return View(GuestIdDisplay);
+        }
        
     }
 }
