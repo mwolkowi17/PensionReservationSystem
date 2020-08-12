@@ -193,7 +193,10 @@ namespace PensionMenagmentService.Controllers
                                       .Include(c => c.Room)
                                       .Include(c => c.Guest)
                                       .ToList();
-
+            if (searchedGuests.Count == 0)
+            {
+                ViewBag.Info = "No guest found.";
+            }
             var GuestIdDisplay = new PensionViewModel()
             {
                 GuestList = searchedGuests,

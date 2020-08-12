@@ -19,8 +19,8 @@ namespace PensionMenagmentService.Controllers
         public IActionResult Index()
         {
             var ReservationsWithBreakfests = _context.Reserevations
-                                            .Where(n => n.Check_in <= DateTime.Now)
-                                            .Where(n => n.Check_out >= DateTime.Now)
+                                            .Where(n => n.Check_in <= DateTime.Now.Date)
+                                            .Where(n => n.Check_out >= DateTime.Now.Date)
                                             .Where(n => n.BreakfestIncluded == true)
                                             .Include(c =>c.Room)
                                             .Include(c =>c.Guest)
