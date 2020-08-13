@@ -66,6 +66,10 @@ namespace PensionMenagmentService.Controllers
             var numberOfDaysInHotel = DateTime.Now.DayOfYear - reservationToCheckout.Check_in.DayOfYear;
           
             var chargeForStayInHotel = numberOfDaysInHotel * roomtocheckout.FirstOrDefault().ReguralPrice;
+            if (reservationToCheckout.BreakfestIncluded == true)
+            {
+                chargeForStayInHotel = (numberOfDaysInHotel * roomtocheckout.FirstOrDefault().ReguralPrice) + (numberOfDaysInHotel * 80);
+            }
             // end of ne segment
             ViewBag.DaysInHotelTotal = $"Days in hotel: {numberOfDaysInHotel}.";
             ViewBag.TotalAmount = $"Total amount for stay: {chargeForStayInHotel} PLN.";

@@ -92,15 +92,16 @@ namespace PensionMenagmentService.Controllers
                    
                     NewReservation.BreakfestIncluded = breakfestincluded;
                     // add breakfest fee with "if" conditional
-                    /* if (NewReservation.BreakfestIncluded == true)
+                    if (NewReservation.BreakfestIncluded == true)
                      {
                          NewReservation.TotalAmount = ((checkout.DayOfYear - checkin.DayOfYear) * RoomToRent.ReguralPrice)+((checkout.DayOfYear - checkin.DayOfYear)*80);
                      }
                      else
                      {
                          NewReservation.TotalAmount = (checkout.DayOfYear - checkin.DayOfYear) * RoomToRent.ReguralPrice;
-                     }*/
-                    NewReservation.TotalAmount = (checkout.DayOfYear - checkin.DayOfYear) * RoomToRent.ReguralPrice;
+                     }
+                    //Old way of Total Amount Count method
+                    //NewReservation.TotalAmount = (checkout.DayOfYear - checkin.DayOfYear) * RoomToRent.ReguralPrice;
                     _context.Reserevations.Add(NewReservation);
                     _context.SaveChanges();
 

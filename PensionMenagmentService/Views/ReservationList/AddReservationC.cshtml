@@ -122,6 +122,14 @@
                             <label for="exampleInputPassword1">Departure Date</label>
                             <input type="text" class="form-control" name="checkout">
                         </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Breakfest</label>
+                            <select class="form-control" name="breakfestincluded" id="exampleFormControlSelect1">
+                                <option value="false">no breakfest</option>
+                                <option value="true">with breakfest</option>
+
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <div class="text-danger">@ViewBag.NoFreeRooms @ViewBag.ValidationText</div>
                     </form>
