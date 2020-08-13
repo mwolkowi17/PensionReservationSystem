@@ -76,6 +76,26 @@
             </table>
         </div>
         <div class="col">
+            <!--Searching guest block-->
+
+            <div class="card" style="margin-bottom:20px">
+                <div class="card-body">
+                    <h5 class="card-title">Search GuestID</h5>
+
+                    <form asp-controller="ReservationList" asp-action="FindGuestId" autocomplete="off">
+
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Guest Surname</label>
+                            <input type="text" class="form-control" name="guestname">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+
+            <!--End of searching block-->
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Reservation Panel</h5>
