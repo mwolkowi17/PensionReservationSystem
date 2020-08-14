@@ -18,7 +18,7 @@ namespace PensionMenagmentService.Controllers
         {
             _context = context;
         }
-
+        //old index method to remove
         /* public IActionResult Index()
          {
              var guestToDislplay = from n in _context.Guests
@@ -31,6 +31,7 @@ namespace PensionMenagmentService.Controllers
              return View(guestVM);
 
        }*/
+        // now it's get ready for sorting and filtering
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             ViewData["CurrentSort"] = sortOrder;
@@ -50,6 +51,7 @@ namespace PensionMenagmentService.Controllers
             int pageSize = 3;
             return View(await PaginatedList<Guest>.CreateAsync(guestToDislplay.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
+
             [HttpPost]
         public IActionResult AddGuest(string nameuser, string surnameuser, string cityuser, string adressuser, string emailuser, string telephonenumberuser)
         {
@@ -82,8 +84,9 @@ namespace PensionMenagmentService.Controllers
                 GuestList = guestToDislplay.ToList()
 
             };
-            return View(guestVM);
-                 
+            //return View(guestVM);
+            return RedirectToAction(nameof(Index));
+
         }
 
         public IActionResult DeleteGuest(int id)
