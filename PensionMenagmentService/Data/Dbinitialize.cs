@@ -17,8 +17,11 @@ namespace PensionMenagmentService.Data
 
             var rooms = new Room[]
             {
-                new Room{Number=1, nubmerbeds=(RoomType)1, ReguralPrice=160},
-                new Room{Number=2, nubmerbeds=(RoomType)1, ReguralPrice=160}
+                new Room{Number=1, nubmerbeds=(RoomType)1, ReguralPrice=200},
+                new Room{Number=2, nubmerbeds=(RoomType)1, ReguralPrice=200},
+                new Room{Number=3, nubmerbeds=(RoomType)1, ReguralPrice=200},
+                new Room{Number=4, nubmerbeds=(RoomType)0, ReguralPrice=150},
+                new Room{Number=5, nubmerbeds=(RoomType)0, ReguralPrice=150}
             };
              foreach (Room n in rooms)
             {
