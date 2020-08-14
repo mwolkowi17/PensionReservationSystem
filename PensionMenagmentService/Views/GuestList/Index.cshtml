@@ -1,5 +1,4 @@
-﻿@model PensionMenagmentService.Models.PensionViewModel
-
+﻿@model PaginatedList<PensionMenagmentService.Models.Guest>
 @{
     ViewData["Title"] = "Index";
 }
@@ -26,31 +25,50 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.GuestList)
+                    @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.GuestID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Surname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Member_since.Year)
-                        </td>
-                        <td>
-                            <a asp-action="GetDetails" asp-route-id="@item.GuestID">Details</a>
-                        </td>
-                        <td>
-                            <a asp-action="DeleteGuest" asp-route-id="@item.GuestID">Delete</a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GuestID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Member_since.Year)
+                            </td>
+                            <td>
+                                <a asp-action="GetDetails" asp-route-id="@item.GuestID">Details</a>
+                            </td>
+                            <td>
+                                <a asp-action="DeleteGuest" asp-route-id="@item.GuestID">Delete</a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @prevDisabled">
+                Previous
+            </a>
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @nextDisabled">
+                Next
+            </a>
         </div>
         <div class="col">
             <div class="card">

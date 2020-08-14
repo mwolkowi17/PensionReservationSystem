@@ -19,18 +19,38 @@ namespace PensionMenagmentService.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        /* public IActionResult Index()
+         {
+             var guestToDislplay = from n in _context.Guests
+                                   select n;
+             var guestVM = new PensionViewModel()
+             {
+                 GuestList = guestToDislplay.ToList()
+
+             };
+             return View(guestVM);
+
+       }*/
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
             var guestToDislplay = from n in _context.Guests
                                   select n;
-            var guestVM = new PensionViewModel()
-            {
-                GuestList = guestToDislplay.ToList()
-
-            };
-            return View(guestVM);
+            int pageSize = 3;
+            return View(await PaginatedList<Guest>.CreateAsync(guestToDislplay.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
-        [HttpPost]
+            [HttpPost]
         public IActionResult AddGuest(string nameuser, string surnameuser, string cityuser, string adressuser, string emailuser, string telephonenumberuser)
         {
             if (nameuser != null && surnameuser != null)
