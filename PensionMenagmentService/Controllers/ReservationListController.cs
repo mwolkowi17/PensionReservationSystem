@@ -159,7 +159,7 @@ namespace PensionMenagmentService.Controllers
                                        .Include(c => c.Room)
                                        .Include(c => c.Guest);
 
-            int pageSize = 5;
+            int pageSize = 8;
 
             return View(await PaginatedList<Reservation>.CreateAsync(reservationsToDisplay.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
@@ -228,7 +228,8 @@ namespace PensionMenagmentService.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult FindGuestId(string guestname)
+        // old FindGuest Method
+        /*public IActionResult FindGuestId(string guestname)
 
         {
             
@@ -250,7 +251,37 @@ namespace PensionMenagmentService.Controllers
                 ReservationList=reservationsToDisplay
             };        
             return View(GuestIdDisplay);
+        }*/
+
+        public async Task<IActionResult> FindGuestIdB(string sortOrder, string currentFilter, string searchString, int? pageNumber, string guestname)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            var searchedGuests = _context.Guests
+                               .Where(n => n.Surname == guestname)
+                               .ToList();
+
+            var reservationsToDisplay = _context.Reserevations
+                                      .Include(c => c.Room)
+                                      .Include(c => c.Guest);
+
+            ViewData["searched_guests"] = searchedGuests;
+
+            int pageSize = 8;
+
+            return View(await PaginatedList<Reservation>.CreateAsync(reservationsToDisplay.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
-       
+
     }
 }
