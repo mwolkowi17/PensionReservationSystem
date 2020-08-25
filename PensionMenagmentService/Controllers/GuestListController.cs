@@ -48,7 +48,7 @@ namespace PensionMenagmentService.Controllers
             }
             var guestToDislplay = from n in _context.Guests
                                   select n;
-            int pageSize = 3;
+            int pageSize = 6;
             return View(await PaginatedList<Guest>.CreateAsync(guestToDislplay.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 

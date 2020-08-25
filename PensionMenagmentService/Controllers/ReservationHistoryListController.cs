@@ -50,7 +50,7 @@ namespace PensionMenagmentService.Controllers
                                               .Include(c => c.Guest)
                                               .Include(c => c.Room);
                                             
-            int pageSize = 5;
+            int pageSize = 8;
             return View(await PaginatedList<ReservationHistory>.CreateAsync(reservationHistoryToDisplay.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
     }

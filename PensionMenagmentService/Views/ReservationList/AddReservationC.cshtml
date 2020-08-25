@@ -1,4 +1,4 @@
-﻿@model PensionMenagmentService.Models.PensionViewModel
+﻿@model PaginatedList<PensionMenagmentService.Models.Reservation>
 
 
 @{
@@ -23,7 +23,7 @@
                         <th>
                             check out
                         </th>
-                       
+
 
                         <th>
                             Name
@@ -37,43 +37,62 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.ReservationList)
+                    @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ReservationID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Check_in)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modleItem => item.Check_out)
-                        </td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReservationID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Check_in)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modleItem => item.Check_out)
+                            </td>
 
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Guest.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Guest.Surname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Room.RoomID)
-                        </td>
-                        <td>
-                            <a asp-action="ReservationDetails" asp-route-id="@item.ReservationID">Details</a>
-                        </td>
-                        <td>
-                            <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
-                        </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Guest.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Guest.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Room.RoomID)
+                            </td>
+                            <td>
+                                <a asp-action="ReservationDetails" asp-route-id="@item.ReservationID">Details</a>
+                            </td>
+                            <td>
+                                <a asp-action="DeleteReservation" asp-route-id="@item.ReservationID">Delete</a>
+                            </td>
 
 
 
 
-                    </tr>
+                        </tr>
                     }
                 </tbody>
             </table>
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @prevDisabled">
+                Previous
+            </a>
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @nextDisabled">
+                Next
+            </a>
         </div>
         <div class="col">
             <!--Searching guest block-->

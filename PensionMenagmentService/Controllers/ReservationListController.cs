@@ -16,10 +16,11 @@ namespace PensionMenagmentService.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        //old index
+        /*public IActionResult Index()
         {
-           /* var reservationToDisplay = from n in _context.Reserevations
-                                       select n;*/
+           //var reservationToDisplay = from n in _context.Reserevations
+            //                           select n;
             var reservationsToDisplay = _context.Reserevations
                                        .Include(c => c.Room)
                                        .Include(c => c.Guest)
@@ -29,9 +30,46 @@ namespace PensionMenagmentService.Controllers
                 ReservationList = reservationsToDisplay
             };
             return View(reservationVM);
-        }
-        public IActionResult AddReservationC(RoomType type, int idguest, DateTime checkin, DateTime checkout, bool breakfestincluded)
+        }*/
+
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            var reservationsToDisplay = _context.Reserevations
+                                      .Include(c => c.Room)
+                                      .Include(c => c.Guest);
+            int pageSize = 8;
+
+            return View(await PaginatedList<Reservation>.CreateAsync(reservationsToDisplay.AsNoTracking(), pageNumber ?? 1, pageSize));
+        }
+
+        //public IActionResult AddReservationC(RoomType type, int idguest, DateTime checkin, DateTime checkout, bool breakfestincluded)
+        public async Task<IActionResult> AddReservationC(string sortOrder, string currentFilter, string searchString, int? pageNumber, RoomType type, int idguest, DateTime checkin, DateTime checkout, bool breakfestincluded)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             if (ModelState.IsValid)
             {
                 var RoomToRentTypeList = (from Room item in _context.Rooms
@@ -119,14 +157,11 @@ namespace PensionMenagmentService.Controllers
                                     select n;*/
             var reservationsToDisplay = _context.Reserevations
                                        .Include(c => c.Room)
-                                       .Include(c => c.Guest)
-                                       .ToList();
-                                       
-            var reservationVM = new PensionViewModel
-            {
-                ReservationList = reservationsToDisplay
-            };
-            return View(reservationVM);
+                                       .Include(c => c.Guest);
+
+            int pageSize = 5;
+
+            return View(await PaginatedList<Reservation>.CreateAsync(reservationsToDisplay.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public IActionResult DeleteReservation(int id)
@@ -194,6 +229,7 @@ namespace PensionMenagmentService.Controllers
         }
 
         public IActionResult FindGuestId(string guestname)
+
         {
             
             var searchedGuests = _context.Guests
