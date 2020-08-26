@@ -178,7 +178,8 @@ namespace PensionMenagmentService.Controllers
                                 where n.RoomID == reservationtodelete.Room.RoomID
                                 select n).FirstOrDefault();
 
-
+            if (roomreserved.Is_ocuppied == false)
+            { 
             Reservation ReservationToArchive = (from Reservation item in _context.Reserevations
                                                 where item.ReservationID == id
                                                 select item).FirstOrDefault();
@@ -194,7 +195,7 @@ namespace PensionMenagmentService.Controllers
             _context.Reserevations.Remove(reservationtodelete);
             roomreserved.Is_ocuppied = false;
             _context.SaveChanges();
-
+            }
             return RedirectToAction(nameof(Index));
         }
         public IActionResult ReservationDetails(int id)
