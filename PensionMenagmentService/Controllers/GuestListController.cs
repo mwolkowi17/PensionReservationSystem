@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PensionMenagmentService.Data;
 using PensionMenagmentService.Models;
 
@@ -14,9 +15,20 @@ namespace PensionMenagmentService.Controllers
     public class GuestListController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public GuestListController(ApplicationDbContext context)
+        private readonly ILogger<HomeController> _logger;
+
+       /* public GuestListController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+            _logger.LogDebug(1, "NLog injected into HomeController");
+        }*/
+
+        public GuestListController(ApplicationDbContext context, ILogger<HomeController> logger)
         {
             _context = context;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog injected into HomeController");
+
         }
         //old index method to remove
         /* public IActionResult Index()
@@ -76,6 +88,8 @@ namespace PensionMenagmentService.Controllers
                 //tu muszę wstawić logowanie błędów
                 catch (Exception)
                 {
+                    _logger.LogInformation("Hello, this is the bug!");
+
                     throw;
                 }
 

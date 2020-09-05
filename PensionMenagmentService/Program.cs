@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PensionMenagmentService.Data;
+using NLog.Web;
 
 namespace PensionMenagmentService
 {
@@ -17,7 +18,7 @@ namespace PensionMenagmentService
         {
             //CreateHostBuilder(args).Build().Run();
             var host = CreateHostBuilder(args).Build();
-
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -28,11 +29,26 @@ namespace PensionMenagmentService
                 }
                 catch (Exception ex)
                 {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred while seeding the database.");
+                    throw;
+                    //logger.LogError(ex, "An error occurred while seeding the database.");
                 }
             }
-
+            try
+            {
+                logger.Debug("init main");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception exception)
+            {
+                //NLog: catch setup errors
+                logger.Error(exception, "Stopped program because of exception");
+                throw;
+            }
+            finally
+            {
+                // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
+                NLog.LogManager.Shutdown();
+            }
             host.Run();
         }
 
@@ -41,7 +57,13 @@ namespace PensionMenagmentService
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+             .ConfigureLogging(logging =>
+             {
+                 logging.ClearProviders();
+                 logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+             })
+      .UseNLog();  // NLog: Setup NLog for Dependency injection
 
     }
 }
