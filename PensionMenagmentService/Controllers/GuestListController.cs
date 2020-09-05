@@ -52,11 +52,13 @@ namespace PensionMenagmentService.Controllers
             return View(await PaginatedList<Guest>.CreateAsync(guestToDislplay.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
-            [HttpPost]
+        [HttpPost]
         public IActionResult AddGuest(string nameuser, string surnameuser, string cityuser, string adressuser, string emailuser, string telephonenumberuser)
         {
             if (nameuser != null && surnameuser != null)
             {
+                try
+                { 
                 Guest nextguest = new Guest()
                 {
                     Name=nameuser,
@@ -70,6 +72,12 @@ namespace PensionMenagmentService.Controllers
 
                 _context.Guests.Add(nextguest);
                 _context.SaveChanges();
+                }
+                //tu muszę wstawić logowanie błędów
+                catch (Exception)
+                {
+                    throw;
+                }
 
             }
             if (nameuser == null || surnameuser == null)
