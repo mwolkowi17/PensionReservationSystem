@@ -86,9 +86,9 @@ namespace PensionMenagmentService.Controllers
                 _context.SaveChanges();
                 }
                 //tu muszę wstawić logowanie błędów
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    _logger.LogInformation("Hello, this is the bug!");
+                    _logger.LogInformation("Hello, this is the bug!", ex);
 
                     throw;
                 }
