@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PensionMenagmentService.Data;
 using PensionMenagmentService.Models;
 
@@ -12,9 +13,13 @@ namespace PensionMenagmentService.Controllers
     public class CheckinController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public CheckinController(ApplicationDbContext context)
+        private readonly ILogger<HomeController> _logger;
+
+        public CheckinController(ApplicationDbContext context, ILogger<HomeController> logger)
         {
             _context = context;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog injected into HomeController");
         }
 
         public IActionResult Index()
@@ -85,9 +90,19 @@ namespace PensionMenagmentService.Controllers
             var usertocheckin = from n in _context.Reserevations
                                 where n.ReservationID == id
                                 select n.Guest;
+            //logowanie błędów
+            try 
+            { 
             roomtocheckin.Is_ocuppied = true;
             roomtocheckin.Guest = usertocheckin.First();
             _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Hello, this is the bug!", ex);
+
+                throw;
+            }
             //return RedirectToAction(nameof(Index));
             ViewBag.CheckinInformation = "Check-in complete.";
             ViewBag.CheckinData = $"Room nr {roomtocheckin.Number} has been rented to {usertocheckin.First().Name} {usertocheckin.First().Surname}.";
