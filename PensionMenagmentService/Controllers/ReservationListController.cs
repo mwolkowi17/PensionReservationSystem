@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PensionMenagmentService.Data;
 using PensionMenagmentService.Models;
 
@@ -12,9 +13,12 @@ namespace PensionMenagmentService.Controllers
     public class ReservationListController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public ReservationListController(ApplicationDbContext context)
+        private readonly ILogger<HomeController> _logger;
+        public ReservationListController(ApplicationDbContext context, ILogger<HomeController> logger)
         {
             _context = context;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog injected into HomeController");
         }
         //old index
         /*public IActionResult Index()
@@ -115,7 +119,7 @@ namespace PensionMenagmentService.Controllers
                 var RoomToRent = (from Room n in RoomsToRent
                                   select n).FirstOrDefault();
 
-
+                try { 
                 if (RoomToRent != null)
                 {
                     //RoomToRent.Is_ocuppied = true;
@@ -144,6 +148,14 @@ namespace PensionMenagmentService.Controllers
                     _context.SaveChanges();
 
                 }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation("Hello, this is the bug!", ex);
+
+                    throw;
+                }
+                
                 if (RoomToRent == null)
                 {
                     ViewBag.NoFreeRooms = "No rooms available.";

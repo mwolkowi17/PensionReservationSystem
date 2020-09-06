@@ -85,7 +85,7 @@ namespace PensionMenagmentService.Controllers
                 _context.Guests.Add(nextguest);
                 _context.SaveChanges();
                 }
-                //tu muszę wstawić logowanie błędów
+                //logowanie błedów
                 catch (Exception ex)
                 {
                     _logger.LogInformation("Hello, this is the bug!", ex);
