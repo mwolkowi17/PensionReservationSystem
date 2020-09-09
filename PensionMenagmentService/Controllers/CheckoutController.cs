@@ -72,11 +72,12 @@ namespace PensionMenagmentService.Controllers
 
                 throw;
             }
-            
-            //new segment - to tests - to reifne
+
+            //new segment - to tests - to refine
             var reservationToCheckout = _context.Reserevations
                                         .Where(n => n.Room == roomtocheckout.FirstOrDefault())
                                         .FirstOrDefault();
+                                        
             var numberOfDaysInHotel = DateTime.Now.DayOfYear - reservationToCheckout.Check_in.DayOfYear;
           
             var chargeForStayInHotel = numberOfDaysInHotel * roomtocheckout.FirstOrDefault().ReguralPrice;
